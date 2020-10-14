@@ -12,6 +12,7 @@ func main() {
     consumerSecret := os.Getenv("NAGITTER_CS")
     accessToken := os.Getenv("NAGITTER_AK")
     accessTokenSecret := os.Getenv("NAGITTER_AS")
+    t := twitter.NewTwitter(consumerKey, consumerSecret, accessToken, accessTokenSecret)
 
     app := &cli.App{
         Flags: []cli.Flag {
@@ -23,7 +24,7 @@ func main() {
             },
         },
         Action:  func(c *cli.Context) error {
-            twitter.Tweet(message, consumerKey, consumerSecret, accessToken, accessTokenSecret);
+            t.Tweet(message)
             return nil
         },
     }
